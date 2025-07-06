@@ -1,8 +1,8 @@
 from fastapi import FastAPI, File, UploadFile, Form, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from resume_parser import extract_text_from_pdf
-from job_matcher import match_jobs
-from gpt_suggester import get_resume_feedback
+from api.resume_parser import extract_text_from_pdf
+from api.job_matcher import match_jobs
+from api.gpt_suggester import get_resume_feedback
 import os
 import asyncio
 from concurrent.futures import ThreadPoolExecutor
