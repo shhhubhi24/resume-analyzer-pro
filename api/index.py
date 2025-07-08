@@ -128,3 +128,4 @@ async def test_groq():
         return {"status": response.status_code, "text": response.text}
     except Exception as e:
         return {"error": str(e)}
+# Minor tweak to trigger git change detection
