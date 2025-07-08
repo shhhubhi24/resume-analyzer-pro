@@ -28,16 +28,38 @@ os.makedirs(UPLOAD_DIR, exist_ok=True)
 
 # 🔢 Resume Score Logic
 def calculate_resume_score(text: str) -> int:
-    score = 50
-    if "project" in text.lower():
+    text_lower = text.lower()
+    score = 0
+
+    # 1. ✅ Skills match
+    important_skills = ["python", "java", "react", "sql", "machine learning", "data analysis", "docker", "cloud"]
+    skill_score = sum(1 for skill in important_skills if skill in text_lower)
+    score += min(skill_score * 3, 20)  # max 20
+
+    # 2. 📂 Project mentions
+    project_keywords = ["project", "developed", "built", "implemented", "designed"]
+    project_score = sum(1 for word in project_keywords if word in text_lower)
+    score += min(project_score * 4, 20)  # max 20
+
+    # 3. 📈 Quantifiable results
+    if any(char in text for char in ["%", "+", "-", "$", "reduced", "increased", "improved"]):
+        score += 15  # bonus for metrics
+
+    # 4. 🧠 Education & Certifications
+    if "bachelor" in text_lower or "master" in text_lower or "certification" in text_lower:
+        score += 15
+
+    # 5. 📝 Length / completeness
+    word_count = len(text.split())
+    if 300 <= word_count <= 1000:
+        score += 15  # ideal range
+    elif word_count > 1000:
         score += 10
-    if any(word in text.lower() for word in ["python", "java", "react", "sql"]):
-        score += 10
-    if any(char in text for char in ["%", "+", "-", "$"]):
-        score += 10
-    if len(text) > 1500:
-        score += 10
+    elif word_count < 300:
+        score += 5
+
     return min(score, 100)
+
 
 # 📥 1. Upload Resume
 @app.post("/upload-resume/")

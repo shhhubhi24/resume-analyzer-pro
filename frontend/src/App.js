@@ -118,7 +118,10 @@ function App() {
         {feedback && (
           <div className="bg-gray-800 p-6 rounded-lg shadow">
             <h2 className="text-2xl font-bold text-blue-400 mb-2">📝 Feedback</h2>
-            <ReactMarkdown className="prose prose-invert">{feedback}</ReactMarkdown>
+            <ReactMarkdown className="prose prose-invert">
+              {feedback.replace(/\\n/g, '\n').replace(/\\"/g, '"')}
+            </ReactMarkdown>
+
           </div>
         )}
 
