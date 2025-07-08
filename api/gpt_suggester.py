@@ -20,17 +20,22 @@ def get_resume_feedback(resume_text: str, role: str = "General") -> str:
     try:
         print("📤 Sending resume to Groq (LLaMA3) with role:", role)
 
-        prompt = textwrap.dedent(f"""
-        You are an expert career advisor. Analyze the following resume for a candidate applying as a {role}.
+        prompt = f"""
+        You are an expert resume reviewer.
 
-        Provide:
-        1. Three specific suggestions to improve the resume.
-        2. Skills/tools that are missing for a {role}.
-        3. Formatting or tone improvements.
+        Review the following resume text for the role of {role}.
+
+        Return:
+        1. **3 specific suggestions for improvement**, formatted as bullet points.
+        2. **Skills/tools missing** — also in bullet points.
+        3. **Formatting/tone improvements** — again, in bullet points.
+        4. Keep the response under 500 words. Use **Markdown** for styling.
 
         Resume:
+        \"\"\"
         {resume_text}
-        """)
+        \"\"\"
+        """
 
         response = client.chat.completions.create(
             model="llama3-70b-8192",
