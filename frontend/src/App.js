@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import ReactMarkdown from "react-markdown";
 import "./App.css";
 
-const API_URL = process.env.REACT_APP_API_URL || "https://resume-analyzer-pro-ko4b.onrender.com";
+const API_URL = process.env.REACT_APP_API_URL || " https://resume-analyzer-pro-1.onrender.com";
 
 function App() {
   const [file, setFile] = useState(null);
