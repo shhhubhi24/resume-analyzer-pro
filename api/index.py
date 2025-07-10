@@ -121,11 +121,14 @@ async def match_jobs_route(payload: dict):
     return {"matches": matches}
 
 # ✅ Groq API Check Endpoint
+
+
 @app.get("/test-groq/")
 async def test_groq():
     try:
-        response = await httpx.get("https://api.groq.com/")  # ✅ FIXED
+        async with httpx.AsyncClient() as client:
+            response = await client.get("https://api.groq.com/")
         return {"status": response.status_code, "text": response.text}
     except Exception as e:
         return {"error": str(e)}
-# Minor tweak to trigger git change detection
+
