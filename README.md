@@ -56,14 +56,6 @@ Leverages **GPT via FastAPI** to:
 
 ---
 
-## 📷 Screenshots (Optional)
-> Include 2–3 screenshots or GIFs showing:
-> - Resume upload screen
-> - AI-generated suggestions
-> - Overall score dashboard
-
----
-
 ## 🧪 How to Run Locally
 
 ```bash
